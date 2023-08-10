@@ -68,7 +68,7 @@ const render = (state, elements, dictionary) => (path, value) => {
   switch (prop) {
     case 'count':
       elements.ctrlButtons.clickBtnEl.textContent = dictionary.t(
-        'keyWithCount',
+        'buttons.clickButtons.count',
         {
           count: value,
         },
@@ -79,11 +79,16 @@ const render = (state, elements, dictionary) => (path, value) => {
         dictionary.changeLanguage(language).then((t) => {
           languageChangeRenderOptions[language](elements);
 
-          elements.ctrlButtons.clickBtnEl.textContent = t('keyWithCount', {
-            count: state.count,
-          });
+          elements.ctrlButtons.clickBtnEl.textContent = t(
+            'buttons.clickButtons.count',
+            {
+              count: state.count,
+            },
+          );
 
-          elements.ctrlButtons.resetBtnEl.textContent = t('reset');
+          elements.ctrlButtons.resetBtnEl.textContent = t(
+            'buttons.resetButton',
+          );
         });
       }
       break;
@@ -124,37 +129,39 @@ function app(dictionary, state, elements) {
   addHandlerForBtn(watchedState, elements.counterContainerEl, handleClick);
 }
 
-export default async function runApp() {
+export default async function initApp() {
+  const defaultLanguage = 'en';
+
   const i18nextInstance = i18n.createInstance();
 
   await i18nextInstance.init({
-    lng: 'en',
+    lng: defaultLanguage,
     debug: false,
-    resources: {
-      ...resources,
-    },
+    resources,
   });
 
   const initialDomElSettings = {
     ruBtn: {
       classes: ['btn', 'mb-3', 'btn-outline-primary'],
       type: 'button',
-      textContent: i18nextInstance.t('secondaryLanguage'),
+      textContent: i18nextInstance.t('languages.ru'),
     },
     enBtn: {
       classes: ['btn', 'mb-3', 'btn-primary'],
       type: 'button',
-      textContent: i18nextInstance.t('defaultLanguage'),
+      textContent: i18nextInstance.t('languages.en'),
     },
     clickBtn: {
       classes: ['btn', 'btn-info', 'mb-3', 'align-self-center'],
       type: 'button',
-      textContent: i18nextInstance.t('keyWithCount', { count: 0 }),
+      textContent: i18nextInstance.t('buttons.clickButtons.count', {
+        count: 0,
+      }),
     },
     resetBtn: {
       classes: ['btn', 'btn-warning'],
       type: 'button',
-      textContent: i18nextInstance.t('reset'),
+      textContent: i18nextInstance.t('buttons.resetButton'),
     },
     btnContainer: {
       classes: ['btn-group'],

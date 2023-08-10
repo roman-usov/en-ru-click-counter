@@ -3,11 +3,17 @@
 export default {
   translation: {
     // BEGIN (write your solution here)
-    defaultLanguage: 'English',
-    secondaryLanguage: 'Русский',
-    reset: 'Reset',
-    keyWithCount_one: '{{count}} click',
-    keyWithCount_other: '{{count}} clicks',
+    languages: {
+      en: 'English',
+      ru: 'Русский',
+    },
+    buttons: {
+      clickButtons: {
+        count_one: '{{count}} click',
+        count_other: '{{count}} clicks',
+      },
+      resetButton: 'Reset',
+    },
     // END
   },
 };

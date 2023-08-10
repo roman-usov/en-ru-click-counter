@@ -3,12 +3,18 @@
 export default {
   translation: {
     // BEGIN (write your solution here)
-    defaultLanguage: 'Русский',
-    secondaryLanguage: 'English',
-    reset: 'Сбросить',
-    keyWithCount_one: '{{count}} клик',
-    keyWithCount_few: '{{count}} клика',
-    keyWithCount_many: '{{count}} кликов',
+    languages: {
+      en: 'English',
+      ru: 'Русский',
+    },
+    buttons: {
+      clickButtons: {
+        count_one: '{{count}} клик',
+        count_few: '{{count}} клика',
+        count_many: '{{count}} кликов',
+      },
+      resetButton: 'Сбросить',
+    },
     // END
   },
 };
