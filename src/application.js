@@ -26,10 +26,12 @@ function createBtnContainerEl({ classes, role }) {
   return btnContainerEl;
 }
 
-function renderInit(
-  state,
-  { counterContainerEl, btnContainerEl, lngButtons, ctrlButtons }
-) {
+function renderInit({
+  counterContainerEl,
+  btnContainerEl,
+  lngButtons,
+  ctrlButtons,
+}) {
   Object.values(lngButtons).forEach((btn) => {
     btnContainerEl.append(btn);
   });
@@ -45,7 +47,7 @@ function addHandlerForBtn(state, container, handler) {
   container.addEventListener('click', handler.bind(null, state));
 }
 
-const lngChangeRenderOptions = {
+const languageChangeRenderOptions = {
   ru: (elements) => {
     elements.lngButtons.ruBtnEl.classList.add('btn-primary');
     elements.lngButtons.ruBtnEl.classList.remove('btn-outline-primary');
@@ -69,13 +71,13 @@ const render = (state, elements, dictionary) => (path, value) => {
         'keyWithCount',
         {
           count: value,
-        }
+        },
       );
       break;
     case 'activeLanguage':
       if (value) {
         dictionary.changeLanguage(language).then((t) => {
-          lngChangeRenderOptions[language](elements);
+          languageChangeRenderOptions[language](elements);
 
           elements.ctrlButtons.clickBtnEl.textContent = t('keyWithCount', {
             count: state.count,
@@ -181,7 +183,7 @@ export default async function runApp() {
     counterContainerEl: document.querySelector('.card'),
   };
 
-  renderInit(initialState, elements);
+  renderInit(elements);
 
   app(i18nextInstance, initialState, elements);
 }
